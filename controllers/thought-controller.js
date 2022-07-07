@@ -6,10 +6,9 @@ module.exports = {
   getAllThoughts(req, res) {
     Thought.find({})
       .populate({
-        path: "user",
+        path: "reactions",
         select: "-__v",
       })
-      .select("-__v")
       .sort({ _id: -1 })
       .then((dbThoughtData) => res.json(dbThoughtData))
       .catch((err) => {
@@ -22,7 +21,7 @@ module.exports = {
   getThoughtById({ params }, res) {
     Thought.findOne({ _id: params.id })
       .populate({
-        path: "user",
+        path: "reactions",
         select: "-__v",
       })
       .select("-__v")
